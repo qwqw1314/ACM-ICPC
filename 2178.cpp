@@ -12,6 +12,7 @@ struct abc
 	int x, y;
 };
 
+// x, y 방향을 가지고 있는 struct를 이용해 벡터 및 큐 정의
 vector<abc> v;
 queue<abc> q;
 
@@ -27,9 +28,13 @@ void BFS()
 		abc temp2 = q.front();
 		for (i = 0; i < 4; i++)
 		{
+			// mx, my를 이용해 다음 탐색 노드 고려
 			int nx = temp2.x + mx[i], ny = temp2.y + my[i];
+			// 다음 위치가 범위 밖이 아닐 경우
 			if (nx >= 1 && nx <= n && ny >= 1 && ny <= m)
 			{
+				// 다음 위치가 이동 가능한 위치이면서
+				// 방문하지 않은 노드일 경우
 				if (chk[nx][ny] == 0 && a[nx][ny] == '1')
 				{
 					abc temp3 = { nx, ny };
