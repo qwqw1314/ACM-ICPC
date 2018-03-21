@@ -4,46 +4,51 @@
 
 using namespace std;
 
-struct abc
-{
-	int from;
-	int to;
-	int distance;
-};
+int n, m;
+int start;
 
-int v, e;
-int dis[20010];
-
-
-struct compare
-{
-	bool operator () (const abc &a, const abc &b)
-	{
-		if (a.distance > b.distance)
-			return true;
-		return false;
-	}
-};
-
-priority_queue < abc, vector<abc>, compare> pq;
+vector<int> edge[20010], dis[20010];
+int dy[20010];
+priority_queue<pair<int, int> > pq;
+queue<int> nodes;
 
 int main()
 {
-	abc temp;
-	int start, i;
-	cin >> v >> e;
-	cin >> start;
-	for (i = 0; i < e; i++)
+	int i, j;
+	cin >> n >> m >> start;
+	for (i = 0; i < m; i++)
 	{
-		cin >> temp.from >> temp.to >> temp.distance;
-		pq.push(temp);
+		int t1, t2, t3;
+		cin >> t1 >> t2 >> t3;
+		edge[t1].push_back(t2);
+		dis[t1].push_back(t3);
 	}
-	cout << endl;
-	for (i = 0; i < e; i++)
+	fill(dy + 1, dy + n + 1, 0x7fffffff);
+	dy[start] = 0;
+	pq.push(make_pair(0, start));
+	while (!pq.empty())
 	{
-		temp = pq.top();
+		pair<int, int> temp = pq.top();
+		int now = temp.second;
 		pq.pop();
-		cout << temp.from << " " << temp.to << " " << temp.distance << endl;
+		for (i = 0; i < dis[now].size(); i++)
+		{
+			int next = edge[now][i];
+			if (dy[next] > dy[now] + dis[now][i])
+			{
+				dy[next] = dy[now] + dis[now][i];
+				pq.push(make_pair(dis[now][i], next));
+			}
+		}
+	}
+	for (i = 1; i <= n; i++)
+	{
+		if (dy[i] == 0x7fffffff)
+			cout << "INF";
+		else
+			cout << dy[i];
+		if (i != n)
+			cout << endl;
 	}
 	return 0;
 }
