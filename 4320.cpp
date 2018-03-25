@@ -11,36 +11,73 @@ int main()
 	int i;
 	while (1)
 	{
-		int t = 2, sqa;
+		bool isminus = false, flag = false;
 		scanf("%lld", &a);
-		if (a == 0)
-			break;
-		if (a % 2 == 1)
-			t++;
-		sqa = sqrt(a);
-		bool flag = false;
-		for (i = t; i <= sqa; i += 2)
+		if (a == 0) break;
+		if (a < 0)
+			isminus = true;
+		int cnt = 0;
+		if (isminus == false)
 		{
-			long long int x = i;
-			int cnt = 1;
-			if (a % i != 0)
-				continue;
-			while (1)
+			for (i = 2; i <= sqrt(a); i++)
 			{
-				x *= i;
-				cnt++;
-				if (x >= a)
+				cnt = 0;
+				if (a % i == 0)
+				{
+					long long int temp = a;
+					while (1)
+					{
+						if (temp == 1)
+						{
+							flag = true;
+							break;
+						}
+						if (temp % i == 0)
+						{
+							temp /= i;
+							cnt++;
+						}
+					}
+				}
+				if (flag == true)
 					break;
 			}
-			if (x == a)
+		}
+		else if (isminus == true)
+		{
+			for (i = -2; i >= -sqrt(-a); i--)
 			{
-				printf("%d\n", cnt);
-				flag = true;
-				break;
+				cnt = 0;
+				if (a % i == 0)
+				{
+					long long int temp = a;
+					while (1)
+					{
+						if (temp == 1)
+						{
+							flag = true;
+							break;
+						}
+						if (temp == -1)
+						{
+							cnt = 1;
+							break;
+						}
+						if (temp % i == 0)
+						{
+							temp /= i;
+							cnt++;
+						}
+					}
+				}
+				if (flag == true)
+					break;
 			}
 		}
-		if (flag == false)
+		if (cnt == 0)
 			printf("1\n");
+		else
+			printf("%d\n", cnt);
 	}
 	return 0;
 }
