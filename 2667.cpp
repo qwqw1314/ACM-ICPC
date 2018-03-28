@@ -65,6 +65,7 @@ int main()
 	cout << cnt << endl;
 	// 각 단지 수를 오름차순으로 정렬
 	sort(v.begin(), v.end());
+	//sort(&v[0], &v[v.size()]
 	for (i = 0; i < v.size(); i++)
 		cout << v[i] << endl;
 	return 0;
