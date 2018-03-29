@@ -23,7 +23,7 @@ int main()
 	for (t = 0; t < T; t++)
 	{
 		cin >> n;
-		int cnt = n;
+		int cnt = 0;
 		for (i = 1; i <= n; i++)
 		{
 			cin >> a[i];
@@ -37,11 +37,11 @@ int main()
 				if (DFS(i) == i)
 				{
 					save[i] = true;
-					cnt--;
+					cnt++;
 				}
 			}
 		}
-		cout << cnt << endl;
+		cout << n - cnt << endl;
 	}
 	return 0;
 }
