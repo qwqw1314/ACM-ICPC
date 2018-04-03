@@ -1,4 +1,70 @@
 #include<iostream>
+#include<queue>
+
+using namespace std;
+
+int n, start;
+int like[100010];
+bool chk[100010];
+int cycle[100010];
+bool flag;
+queue<int> q;
+
+void DFS(int now)
+{
+	if (like[now] == start && chk[like[now]] == false)
+	{
+		q.push(like[now]);
+		while (!q.empty())
+		{
+			int temp = q.front();
+			q.pop();
+			cycle[temp] = 1;
+		}
+	}
+	if (chk[like[now]] == false)
+	{
+		chk[like[now]] = true;
+		q.push(like[now]);
+		DFS(like[now]);
+		chk[like[now]] = false;
+	}
+}
+
+int main()
+{
+	int t, i;
+	cin >> t;
+	while (t--)
+	{
+		cin >> n;
+		for (i = 1; i <= n; i++)
+		{
+			cycle[i] = 0;
+			cin >> like[i];
+		}
+		for (i = 1; i <= n; i++)
+		{
+			if (cycle[i] == 0)
+			{
+				flag = false;
+				start = i;
+				DFS(i);
+				while (!q.empty())
+					q.pop();
+			}
+		}
+		int cnt = 0;
+		for (i = 1; i <= n; i++)
+			if (cycle[i] == 0)
+				cnt++;
+		cout << cnt << endl;
+	}
+	return 0;
+}
+
+/*
+#include<iostream>
 #include<vector>
 
 using namespace std;
@@ -45,7 +111,7 @@ int main()
 	}
 	return 0;
 }
-
+*/
 /*
 #include<iostream>
 

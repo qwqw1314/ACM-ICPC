@@ -1,3 +1,164 @@
+// ¾ÆÁ÷µµ ÀÌÇØ¾ÈµÊ ÄÚµå ±Ü¾î¿È
+// https://blog.naver.com/kokoxg2/221097959119
+#include <cstdio>
+#include <vector>
+
+typedef struct {  //ÁÂÇ¥ ±¸Á¶Ã¼
+	int x, y;
+}Pos;
+
+const int dx[4] = { -1,1,0,0 }, dy[4] = { 0,0,-1,1 };
+
+std::pair<int, int> ice[301][301];
+bool visit[301][301];
+
+int n, m;
+
+std::vector<Pos> vec;
+
+void dfs(const Pos& p);
+
+int main() {
+	scanf("%d %d", &n, &m);
+	for (int i = 1; i <= n; ++i) {
+		for (int j = 1; j <= m; ++j) {
+			scanf("%d", &ice[i][j].first);
+			if (ice[i][j].first != 0)
+				vec.push_back({ i,j });
+		}
+	}
+
+	int count = 0, len2;
+
+	while (!vec.empty()) {
+
+		len2 = vec.size(); 
+		dfs(vec[0]);
+		for (int i = 0; i < len2; ++i)
+			if (!visit[vec[i].x][vec[i].y])
+				return 0 & printf("%d\n", count);
+
+		count++;
+		for (int i = 0; i < len2; ++i) {
+			visit[vec[i].x][vec[i].y] = false;
+			ice[vec[i].x][vec[i].y].first -= ice[vec[i].x][vec[i].y].second;
+			ice[vec[i].x][vec[i].y].second = 0;
+			if (ice[vec[i].x][vec[i].y].first < 1) {
+				ice[vec[i].x][vec[i].y].first = 0;
+				vec.erase(vec.begin() + i--);
+				len2 -= 1;
+			}
+		}
+	}
+	printf("0\n");
+
+	return 0;
+}
+
+void dfs(const Pos& p) {
+
+	visit[p.x][p.y] = true;
+	for (int i = 0; i < 4; ++i) {
+		int x = p.x + dx[i];
+		int y = p.y + dy[i];
+		if (ice[x][y].first == 0) ice[p.x][p.y].second++;
+		if (x <= 1 || y <= 1 || n < x || m < y || ice[x][y].first == 0 || visit[x][y]) continue;
+		dfs({ x,y });
+	}
+}
+
+/*
+#include<iostream>
+
+using namespace std;
+
+int n, m;
+int ice[310][310], melt[310][310];
+int mx[4] = { -1, 1, 0, 0 }, my[4] = { 0, 0, -1, 1 };
+bool chk[310][310];
+
+int cntzero(int x, int y)
+{
+	int i, cnt = 0;
+	for (i = 0; i < 4; i++)
+	{
+		int nx = x + mx[i], ny = y + my[i];
+		if (nx >= 1 && nx <= n && ny >= 1 && ny <= m)
+		{
+			if (ice[nx][ny] == 0)
+				cnt++;
+		}
+	}
+	return cnt;
+}
+
+void DFS(int x, int y)
+{
+	int i;
+	for (i = 0; i < 4; i++)
+	{
+		int nx = x + mx[i], ny = y + my[i];
+		if (nx >= 1 && nx <= n && ny >= 1 && ny <= m)
+		{
+			if (ice[nx][ny] > 0 && !chk[nx][ny])
+			{
+				chk[nx][ny] = true;
+				DFS(nx, ny);
+			}
+		}
+	}
+}
+
+int main()
+{
+	int i, j, decade = 0, group = 0;
+	cin >> n >> m;
+	for (i = 1; i <= n; i++)
+		for (j = 1; j <= m; j++)
+			cin >> ice[i][j];
+	while (1)
+	{
+		group = 0;
+		decade++;
+		for (i = 1; i <= n; i++)
+		{
+			for (j = 1; j <= m; j++)
+			{
+				chk[i][j] = false;
+				if (ice[i][j] > 0)
+					melt[i][j] = cntzero(i, j);
+			}
+		}
+		for (i = 1; i <= n; i++)
+			for (j = 1; j <= m; j++)
+				if (ice[i][j] > 0 && melt[i][j] > 0)
+					ice[i][j] -= melt[i][j];
+		for (i = 1; i <= n; i++)
+		{
+			for (j = 1; j <= m; j++)
+			{
+				if (ice[i][j] > 0 && !chk[i][j])
+				{
+					group++;
+					chk[i][j] = true;
+					DFS(i, j);
+				}
+			}
+		}
+		if (group >= 2)
+			break;
+		else if (group == 0)
+		{
+			decade = 0;
+			break;
+		}
+	}
+	cout << decade;
+	return 0;
+}*/
+
+
+/*
 #include<iostream>
 #include<queue>
 
@@ -117,6 +278,7 @@ int main()
 	}
 	return 0;
 }
+*/
 /*
 5 2
 0 1 1 1 0
