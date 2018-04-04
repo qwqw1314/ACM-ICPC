@@ -23,6 +23,9 @@ int main()
 	for (i = 1; i <= n; i++)
 		for (j = 1; j <= a[i]; j++)
 			dy[i + j] = minx(dy[i + j], dy[i] + 1);
-	cout << dy[n];
+	if (dy[n] == 1000000)
+		cout << -1;
+	else
+		cout << dy[n];
 	return 0;
 }
