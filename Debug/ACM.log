@@ -1,7 +1,3 @@
-﻿  2602.cpp
-c:\users\오세준\desktop\강의자료\acm\acm\2602.cpp(41): warning C4244: '+=': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\오세준\desktop\강의자료\acm\acm\2602.cpp(51): warning C4244: '+=': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\오세준\desktop\강의자료\acm\acm\2602.cpp(61): warning C4244: '+=': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\오세준\desktop\강의자료\acm\acm\2602.cpp(63): warning C4244: '+=': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  11049.cpp
   ACM.vcxproj -> C:\Users\오세준\Desktop\강의자료\ACM\Debug\ACM.exe
   ACM.vcxproj -> C:\Users\오세준\Desktop\강의자료\ACM\Debug\ACM.pdb (Full PDB)
