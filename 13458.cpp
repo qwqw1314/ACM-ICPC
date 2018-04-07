@@ -19,9 +19,9 @@ int main()
 	{
 		if (arr[i] > 0)
 		{
-			if (arr[i] % s == 0)
+			if (arr[i] % s == 0) // 총감독관을 제외한 부감독관이 딱 맞을 경우
 				cnt += arr[i] / s;
-			else
+			else // 부감독관으로 나눠도 나누어 떨어지지 않을 경우
 				cnt += (arr[i] / s) + 1;
 		}
 	}

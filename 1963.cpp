@@ -3,6 +3,57 @@
 
 using namespace std;
 
+int num[4], cnt[10010];
+bool prime[10010];
+queue<int> q;
+
+int makearray(int x)
+{
+	num[0] = x / 1000;
+	num[1] = x / 100 % 10;
+	num[2] = x / 10 % 10;
+	num[3] = x % 10;
+}
+
+int main()
+{
+	int i, j, t;
+	for (i = 2; i <= 100; i++)
+	{
+		if (prime[i] == true)
+			continue;
+		for (j = i + i; j <= 10000; j+= i)
+			prime[j] = true;
+	}
+	cin >> t;
+	while (t--)
+	{
+		int from, to;
+		cin >> from >> to;
+		q.push(from);
+		while (!q.empty())
+		{
+			int temp = q.front();
+			q.pop();
+			for (i = 0; i < 4; i++)
+			{
+				for (j = 0; j <= 9; j++)
+				{
+					if (i == 0 && j == 0)
+						continue;
+				}
+			}
+		}
+	}
+	return 0;
+}
+
+/*
+#include<iostream>
+#include<queue>
+
+using namespace std;
+
 int cnt[10010];
 bool arr[10010];
 int a, b;
@@ -64,3 +115,4 @@ int main()
 	}
 	return 0;
 }
+*/
