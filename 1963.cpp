@@ -3,11 +3,11 @@
 
 using namespace std;
 
-int num[4], cnt[10010];
+int arr[4], check[10010];
 bool prime[10010];
-queue<int> q;
+queue<pair<int, int> > q;
 
-int makearray(int x)
+void makearray(int x, int num[4])
 {
 	num[0] = x / 1000;
 	num[1] = x / 100 % 10;
@@ -30,20 +30,37 @@ int main()
 	{
 		int from, to;
 		cin >> from >> to;
-		q.push(from);
+		q.push(make_pair(from, 0));
 		while (!q.empty())
 		{
-			int temp = q.front();
+			pair<int, int> temp = q.front();
+			if (temp.first == to)
+			{
+				cout << temp.second << endl;
+				break;
+			}
 			q.pop();
 			for (i = 0; i < 4; i++)
 			{
+				makearray(temp.first, arr);
 				for (j = 0; j <= 9; j++)
 				{
 					if (i == 0 && j == 0)
 						continue;
+					arr[i] = j;
+					int temp2 = arr[0] * 1000 + arr[1] * 100 + arr[2] * 10 + arr[3];
+					if (prime[temp2] == false && check[temp2] == 0)
+					{
+						q.push(make_pair(temp2, temp.second + 1));
+						check[temp2] = 1;
+					}
 				}
 			}
 		}
+		while (!q.empty())
+			q.pop();
+		for (i = 1000; i < 10000; i++)
+			check[i] = 0;
 	}
 	return 0;
 }
