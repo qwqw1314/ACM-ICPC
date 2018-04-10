@@ -1,3 +1,4 @@
-﻿  3055.cpp
+﻿  2624.cpp
+c:\users\오세준\desktop\강의자료\acm\acm\2624.cpp(18): warning C4101: 'j' :참조되지 않은 지역 변수입니다.
   ACM.vcxproj -> C:\Users\오세준\Desktop\강의자료\ACM\Debug\ACM.exe
   ACM.vcxproj -> C:\Users\오세준\Desktop\강의자료\ACM\Debug\ACM.pdb (Full PDB)
