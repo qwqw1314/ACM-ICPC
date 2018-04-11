@@ -1,3 +1,68 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+
+int start, like[100010], cycle[100010];
+bool check[100010], flag;
+
+void DFS(int x)
+{
+	if (start == x)
+	{
+		flag = true;
+		cycle[x] = 1;
+		return;
+	}
+	if (check[like[x]] || cycle[like[x]] != 0)
+	{
+		flag = false;
+		return;
+	}
+	if (!check[like[x]])
+	{
+		check[like[x]] = true;
+		DFS(like[x]);
+		check[like[x]] = false;
+		if (flag == true)
+			cycle[x] = 1;
+	}
+}
+
+int main()
+{
+	int t, i;
+	scanf("%d", &t);
+	while (t--)
+	{
+		int n;
+		scanf("%d", &n);
+		for (i = 1; i <= n; i++)
+			scanf("%d", &like[i]);
+		for (i = 1; i <= n; i++)
+		{
+			flag = false;
+			if (cycle[i] == 0)
+			{
+				start = i;
+				DFS(like[i]);
+				if (!flag)
+					cycle[i] = 2;
+				else
+					cycle[i] = 1;
+			}
+		}
+		int cnt = 0;
+		for (i = 1; i <= n; i++)
+		{
+			if (cycle[i] == 1)
+				cnt++;
+			cycle[i] = 0;
+		}
+		printf("%d\n", n - cnt);
+	}
+	return 0;
+}
+
+/*
 #include<iostream>
 #include<queue>
 
@@ -62,6 +127,7 @@ int main()
 	}
 	return 0;
 }
+*/
 
 /*
 #include<iostream>
